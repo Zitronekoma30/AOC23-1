@@ -26,6 +26,7 @@ class Main {
     public static void main(String[] args) {
         String input = getFileContent("input.txt");
         String[] lines = input.split(System.lineSeparator());
+        //System.out.println(cleanNums("two1nine"));
         System.out.println(getSum(lines, doTask2));
     }
 
@@ -78,29 +79,19 @@ class Main {
     }
 
     public static String cleanNums(String in){
-        // has front bias so detects eightwo as 8wo so sum is wrong
-        // could fix by going over everything looking for specific num word for each num word and remembering positions
-        // then stitching together by position
-        // can't be bothered tho
-                 
-        StringBuilder buff = new StringBuilder();
         StringBuilder out = new StringBuilder();
 
-        for (char c : in.toCharArray()){
-            if (Character.isDigit(c)){
-                out.append(c);
-                buff.setLength(0);
+        for (int i = 0; i < in.length(); i++){
+            if (Character.isDigit(in.charAt(i))){
+                out.append(in.charAt(i));
                 continue;
             }
-            buff.append(c);
-            for (Entry<String,String> e : nums.entrySet()){
-                if (buff.toString().contains(e.getKey())){
-                    out.append(e.getValue());
-                    buff.setLength(0);
-                }
+            for (Entry<String, String> e : nums.entrySet()){
+                if (!in.substring(i).startsWith(e.getKey())) continue;
+                out.append(e.getValue());
             }
-        }
 
+        }
         return out.toString();
     }
 }

@@ -22,7 +22,7 @@ class Main {
     }
     
     public static boolean doTask2 = true;
-    
+
     public static void main(String[] args) {
         String input = getFileContent("input.txt");
         String[] lines = input.split(System.lineSeparator());
@@ -78,6 +78,11 @@ class Main {
     }
 
     public static String cleanNums(String in){
+        // has front bias so detects eightwo as 8wo so sum is wrong
+        // could fix by going over everything looking for specific num word for each num word and remembering positions
+        // then stitching together by position
+        // can't be bothered tho
+                 
         StringBuilder buff = new StringBuilder();
         StringBuilder out = new StringBuilder();
 
